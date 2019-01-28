@@ -8,6 +8,7 @@ void setup(){
 //sensors
   pinMode(2,INPUT);
   pinMode(3,INPUT);
+  pinMode(4,INPUT);
 //motors
   pinMode(ma1,OUTPUT);
   pinMode(ma2,OUTPUT);
@@ -25,6 +26,11 @@ void loop(){
   delay(1);
   int sendD=digitalRead(3);
   delay(1);
+  int senaE =analogRead(sir3);
+  delay(1);
+  int sendE = digitalRead(4);
+  delay(1);
+  
     Serial.print("analog 1 ");
     Serial.println(senaI);
     Serial.print("digital 1 ");
@@ -33,8 +39,11 @@ void loop(){
     Serial.println(senaD);
     Serial.print("digital 2 ");
     Serial.println(sendD);
-  if(sendI==1&&sendD==1){
-    ford(150);
+    Serial.print("Analog 3");
+    Serial.println(sendE); 
+    
+  if(sendI==1&&sendD==1&&sendE ==0){
+    derecho(150);
   }
   else if(sendI==1&&sendD==0){
     left(150);
@@ -42,11 +51,11 @@ void loop(){
   else if(sendI==0&&sendD==1){
     right(150);
   }
-  else if(sendI==0&&sendD==0){
+  else if(sendI==0&&sendD==0&& sendE==0){
     finish(150);
   }
 }
-void ford(int vel){
+void derecho(int vel){
   digitalWrite(ma1,HIGH);
   digitalWrite(ma2,LOW);
   analogWrite(pwma,vel);
