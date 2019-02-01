@@ -1,15 +1,13 @@
 byte sir1=A0;
 byte sir2=A1;
-byte sir3=A2;
 int ma1=8,ma2=9,pwma=10;
 int mb1=7,mb2=6,pwmb=5;
 void setup(){
   Serial.begin(9600);
-//sensors
+//sensores
   pinMode(2,INPUT);
   pinMode(3,INPUT);
-  pinMode(4,INPUT);
-//motors
+//motores
   pinMode(ma1,OUTPUT);
   pinMode(ma2,OUTPUT);
   pinMode(pwma,OUTPUT);
@@ -26,11 +24,7 @@ void loop(){
   delay(1);
   int sendD=digitalRead(3);
   delay(1);
-  int senaE =analogRead(sir3);
-  delay(1);
-  int sendE = digitalRead(4);
-  delay(1);
-  
+ 
     Serial.print("analog 1 ");
     Serial.println(senaI);
     Serial.print("digital 1 ");
@@ -42,7 +36,7 @@ void loop(){
     Serial.print("Analog 3");
     Serial.println(sendE); 
     
-  if(sendI==1&&sendD==1&&sendE ==0){
+  if(sendI==1&&sendD==1){
     derecho(150);
   }
   else if(sendI==1&&sendD==0){
@@ -51,16 +45,16 @@ void loop(){
   else if(sendI==0&&sendD==1){
     right(150);
   }
-  else if(sendI==0&&sendD==0&& sendE==0){
+  else if(sendI==0&&sendD==0){
     finish(150);
   }
 }
 void derecho(int vel){
   digitalWrite(ma1,HIGH);
-  digitalWrite(ma2,LOW);
+  digitalWrite(ma2,HIGH);
   analogWrite(pwma,vel);
   digitalWrite(mb1,HIGH);
-  digitalWrite(mb2,LOW);
+  digitalWrite(mb2,HIGH);
   analogWrite(pwmb,vel);
 }
 void left(int vel){
